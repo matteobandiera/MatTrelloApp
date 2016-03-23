@@ -1,0 +1,62 @@
+<div class="container list-container">
+    <div class="page-header">
+        <h1>{{board.name}} <span class="glyphicon glyphicon-lock" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Login to unlock"></span></h1>
+        <h2>{{board.description}}</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4" ng-repeat="list in lists">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{list.name}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-warning alert-dismissible fade in" role="alert" id="alert-{{list.$id}}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                    </div>
+                    <div class="well well-sm" ng-repeat="card in cards | onList: list.$id">
+                        <span class="glyphicon glyphicon-remove-sign show-hand" aria-hidden="true" title="Remove Card" ng-click="removeCard(card)"></span>
+                        {{card.name}}
+                        
+                    </div>
+                </div>
+                <div class="panel-footer clearfix">
+                    <button ng-click="gotoAddCard(list.$id)" class="btn btn-primary pull-right">Add Card</button>
+                    &nbsp;
+                </div>
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New List</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="formList" novalidate ng-submit="addList(newList)">
+                        <div class="form-group">
+                            <label for="listName" class="col-sm-4 control-label">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="listName" id="listName" ng-model="newList.name" required>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="listDesc" class="col-sm-4 control-label">Description</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" class="form-control" name="listDesc" id="listDesc" rows="3" ng-model="newList.description" required></textarea>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <button type="submit" class="btn btn-primary pull-right" ng-disabled="formList.$invalid" >Add List</button>
+                    </form>
+                </div>                 
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
